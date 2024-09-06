@@ -25,7 +25,7 @@ use crate::Named;
 /// pile.shuffle();
 /// ```
 
-#[derive(Clone, Debug, Hash, PartialEq)]
+#[derive(Clone, Debug, Default, Hash, PartialEq)]
 pub struct Pile(Vec<Card>);
 
 impl Pile {
@@ -221,7 +221,7 @@ impl Pile {
         self.0.first()
     }
 
-    fn fold_in(&mut self, suits: &[Suit], ranks: &[Rank]) {
+    pub fn fold_in(&mut self, suits: &[Suit], ranks: &[Rank]) {
         for suit in suits {
             for rank in ranks {
                 self.push(Card::new(*rank, *suit));
@@ -644,12 +644,6 @@ impl Pile {
             output
         });
         out.trim_end().to_string()
-    }
-}
-
-impl Default for Pile {
-    fn default() -> Self {
-        Pile::from_vector(Vec::new())
     }
 }
 
